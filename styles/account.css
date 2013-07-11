@@ -1,0 +1,12 @@
+/* side bar begins */
+.st { background-color:#9BBAD6;text-align:center;color:#ffffff;font-size:12pt}
+.nst{ text-align:center;}
+.nsl{text-decoration:underline;color:#003399;font-size:12pt}
+.nsl:hover{color:#000000}
+/* side bar ends */
+.rowOdd {background-color: #EAEAEA;}
+.rowEven {background-color: #FAFAFA;}
+.tableContent {font-size:12px;font-family: Times New Roman;}
+.tableLinks			{text-decoration : none; font-size:12px; color: #333399;font-weight: bold;font-family: System; }
+.accountButton1 {font-family: "Arial","sans-serif";font-size: 8pt;font-weight: normal;font-Style: normal;font-variant: normal;color: #000000;background-color: #ffffff}
+.tableLinks:hover {  color: #FF0000;text-decoration: underline;}

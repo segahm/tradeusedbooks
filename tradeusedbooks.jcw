@@ -1,0 +1,16 @@
+<?xml?>
+<workspace>
+	<settings>
+		<label>tradeusedbooks</label>
+	</settings>
+	<users>
+		<user>
+			<path>tradeusedbooks.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>tradeusedbooks.jcp</path>
+		</project>
+	</projects>
+</workspace>

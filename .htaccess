@@ -1,0 +1,76 @@
+#server...
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+RewriteEngine on
+ErrorDocument 500 /errorpages/server_error.html
+ErrorDocument 503 /errorpages/503_error.html
+#rewrite to www. subdomain (doesn't seem to work)
+RewriteCond %{HTTP_HOST}   !^www\.tradeusedbooks\.com [NC,OR]
+RewriteCond %{HTTP_HOST}   !^tradeusedbooks\.com [NC]
+RewriteCond %{HTTP_HOST}   !^$
+RewriteRule ^/(.*)         http://www.tradeusedbooks.com/$1 [L,R]
+#RewriteCond %{REMOTE_HOST} !^169.233.37.215
+#RewriteRule ^.*$ update.html
+#prevent access to images
+#RewriteCond %{HTTP_REFERER} !^http://tradeusedbooks.com/.*$      [NC]
+#RewriteCond %{HTTP_REFERER} !^http://tradeusedbooks.com$      [NC]
+#RewriteCond %{HTTP_REFERER} !^http://www.tradeusedbooks.com/.*$      [NC]
+#RewriteCond %{HTTP_REFERER} !^http://www.tradeusedbooks.com$      [NC]
+#RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
+#search engine scam begins
+#rewrite home page to the home page for search index
+#RewriteCond %{REMOTE_HOST} ^169.233.38.195 [OR]
+RewriteCond %{HTTP_USER_AGENT} ^.*[yY]ahoo.*[sS]lurp.* [OR]
+RewriteCond %{HTTP_USER_AGENT} ^.*[gG]ooglebot.* [OR]
+RewriteCond %{HTTP_USER_AGENT} ^.*[lL]ynx.* [OR]
+RewriteCond %{HTTP_USER_AGENT} ^.*msnbot.* [OR]
+RewriteCond %{HTTP_USER_AGENT} ^.*crawl.* [OR]
+RewriteCond %{HTTP_USER_AGENT} ^.*bot.*
+RewriteRule ^$ indexPage.html
+#rewrite index page to jsp
+RewriteCond %{HTTP_USER_AGENT} !^.*[Bb]ot.*
+RewriteRule ^googleindex.*$ p/m
+RewriteRule ^googleindex.*$ general/robot.jsp
+#if not search engine don't allow the request to /url
+#RewriteCond %{REMOTE_HOST} !^169.233.38.195
+RewriteCond %{HTTP_USER_AGENT} !^.*[yY]ahoo.*[sS]lurp.*
+RewriteCond %{HTTP_USER_AGENT} !^.*[gG]ooglebot.*
+RewriteCond %{HTTP_USER_AGENT} !^.*[lL]ynx.*
+RewriteCond %{HTTP_USER_AGENT} !^.*msnbot.*
+RewriteCond %{HTTP_USER_AGENT} !^.*crawl.*
+RewriteCond %{HTTP_USER_AGENT} !^.*bot.*
+RewriteRule ^url/(.*)$ p/m
+#rewriting all images to their normal addresses
+RewriteRule ^url/(.*\.(jpg|jpeg|gif|png|bmp))$ http://$1
+#sending the request to jsp
+RewriteRule ^url/(.*)$ general/issueRequest.jsp?$1
+#search engine scam ends
+#default home pages p/[mwb]
+RewriteRule ^p\/([mwb])$ index.php?path=$1
+RewriteRule ^query$ servlet/server.SearchServlet
+RewriteRule ^book/(.+)$ servlet/server.BookServlet?$1
+RewriteRule ^buy$ servlet/server.BuyServlet
+RewriteRule ^auth/((signin|signout|register|forgot).*)$ servlet/server.authorization/$1
+RewriteRule ^bookstores/auth/((signin|signout|register|forgot|adminconfirm).*)$ servlet/server.bookstoreSignin/$1
+RewriteRule ^bookstores/account/((update|books|post).*)$ servlet/server.bookstoreAccount/$1
+RewriteRule ^bookstores/book/(.*)$ servlet/server.bookstoreBook?$1
+RewriteRule ^pbooks$ servlet/server.postB 
+RewriteRule ^pwanted$ servlet/server.postW
+RewriteRule ^confirm/(user)$ servlet/server.confirmation/$1
+RewriteRule ^account/(.*)$ servlet/server.account/$1
+RewriteRule ^feedback$ servlet/server.feedbackServlet
+#
+RewriteRule ^question$ servlet/server.QuestionServlet
+RewriteRule ^doc/terms$ general/terms.php
+RewriteRule ^doc/condition$ general/condition.php
+RewriteRule ^doc/help$ general/help.php
+RewriteRule ^doc/contact$ general/contact.php
+RewriteRule ^doc/support$ general/support.php
+RewriteRule ^doc/about$ general/about.php
+#RewriteRule ^doc/partners$ general/partners.php
+#email stuff
+RewriteRule ^emailremove$ servlet/server.removeEmail
+

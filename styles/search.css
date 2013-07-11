@@ -1,0 +1,9 @@
+/* category bar*/
+.categoryLinks {color: #0000cc;
+font-family: Myriad Web,Verdana; font-size: 14px; text-decoration: none;}
+.categoryLinks:hover {  text-decoration: underline;}
+/* results table */
+.rowOdd {background-color: #EAEAEA;}
+.rowEven {background-color: #FAFAFA;}
+.titleLinks	{font-weight:bold;text-decoration: none; font-size:12px; color: #333399;font-family: System,Verdana,Times New Roman;}
+.titleLinks:hover {  color: #FF0000;text-decoration: underline;}
